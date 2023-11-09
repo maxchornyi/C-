@@ -1,1 +1,196 @@
-daaa
+using System;
+
+class Program
+{
+    static void Main()
+    {
+//2 question
+        Console.Write("Введи дiйсне число: ");
+        if (double.TryParse(Console.ReadLine(), out double number))
+        {
+            int integerPart = (int)number;
+            double fractionalPart = number - integerPart;
+            int firstDigitAfterDecimal = (int)(fractionalPart * 10);
+            fractionalPart -= (double)firstDigitAfterDecimal / 10;
+            int secondDigitAfterDecimal = (int)(fractionalPart * 100);
+
+            int sum = firstDigitAfterDecimal + secondDigitAfterDecimal;
+
+            Console.WriteLine($"Перша цифра пiсля коми: {firstDigitAfterDecimal}");
+            Console.WriteLine($"Друга цифра пiсля коми: {secondDigitAfterDecimal}");
+            Console.WriteLine($"Сума цих цифр: {firstDigitAfterDecimal} + {secondDigitAfterDecimal} = {sum}");
+        }
+        else
+        {
+            Console.WriteLine("Введено неправильне число");
+  
+        
+        
+            {
+//1 question
+        Console.Write("Введи перше число: ");
+        if (int.TryParse(Console.ReadLine(), out int number1))
+        {
+            Console.Write("Введи друге число: ");
+            if (int.TryParse(Console.ReadLine(), out int number2))
+            {
+                bool isValidDay = number1 >= 1 && number1 <= 31;
+                bool isValidMonth = number2 >= 1 && number2 <= 12;
+
+                if (isValidDay && isValidMonth)
+                {
+                    Console.WriteLine($"Числа {number1} та {number2} можуть бути днем та місяцем.");
+                }
+                else
+                {
+                    Console.WriteLine($"Числа {number1} та {number2} не можуть бути днем та місяцем.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Друге введення не є цілим числом.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Перше ведення не є цілим числом.");
+        }
+    }
+//3 question
+Console.Write("Введи цiле число h (години): ");
+if (int.TryParse(Console.ReadLine(), out int h))
+{
+    if (h >= 0 && h < 24)
+    {
+        string greeting;
+
+        if (h >= 5 && h < 12)
+        {
+            greeting = "Доброо ранку!";
+        }
+        else if (h >= 12 && h < 17)
+        {
+            greeting = "Добрий день!";
+        }
+        else if (h >= 17 && h < 22)
+        {
+            greeting = "Добрий вечiр!";
+        }
+        else
+        {
+            greeting = "Доброї ночi!";
+        }
+
+        Console.WriteLine(greeting);
+    }
+    else
+    {
+        Console.WriteLine("Введене число не вiдповiдає годинам у добi.");
+    }
+}
+else
+{
+    Console.WriteLine("Введено некоректне число.");
+}
+}
+        
+        }
+    }
+ // 4 question
+ Console.Write("Введи перше цiле число: ");
+if (int.TryParse(Console.ReadLine(), out int num1))
+{
+    Console.Write("Введи друге цiле число: ");
+    if (int.TryParse(Console.ReadLine(), out int num2))
+    {
+        Console.Write("Введи третє цiле число: ");
+        if (int.TryParse(Console.ReadLine(), out int num3))
+        {
+            int max = Math.Max(Math.Max(num1, num2), num3);
+
+            int min = Math.Min(Math.Min(num1, num2), num3);
+
+            Console.WriteLine($"Максимальне значення: {max}");
+            Console.WriteLine($"Мiнiмальне значення: {min}");
+        }
+        else
+        {
+            Console.WriteLine("Третє введене значення не є цілим числом");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Друге введене значення не є цілим числом");
+    }
+}
+else
+{
+    Console.WriteLine("Перше введення значення не є цілим числом");
+}
+//5 question
+Console.Write("Введи довжину прямокутника: ");
+if (double.TryParse(Console.ReadLine(), out double length))
+{
+    Console.Write("Введiть ширину прямокутника: ");
+    if (double.TryParse(Console.ReadLine(), out double width))
+    {
+        double area = length * width;
+
+        Console.WriteLine($"Площа прямокутника з довжиною {length} i шириною {width} дорiвнює {area}");
+    }
+    else
+    {
+        Console.WriteLine("Введена ширина не є дiйсним числом.");
+    }
+}
+else
+{
+    Console.WriteLine("Введена довжина не є дiйсним числом.");
+}
+ //6 question
+ Console.Write("Введiть цiле число: ");
+ if (int.TryParse(Console.ReadLine(), out int number7))
+ {
+     if (number7% 2 == 0)
+     {
+         Console.WriteLine($"{number7} є парним числом.");
+     }
+     else
+     {
+         Console.WriteLine($"{number7} є непарним числом.");
+     }
+ }
+ else
+ {
+     Console.WriteLine("Введено некоректне число.");
+ }
+    //7 question
+Console.Write("Введiть температуру в градусах Цельсiя: ");
+if (double.TryParse(Console.ReadLine(), out double celsius))
+{
+    double fahrenheit = (celsius * 9 / 5) + 32;
+    Console.WriteLine($"Температура в градусах Фаренгейта: {fahrenheit} °F");
+}
+else
+{
+    Console.WriteLine("Введено некоректну температуру.");
+}
+    //8 question
+    Console.Write("Введiть n (натуральне число): ");
+    if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+    {
+        int sum = 0;
+
+        for (int i = 1; i <= n; i++)
+        {
+            sum += i;
+        }
+
+        Console.WriteLine($"Сума перших {n} натуральних чисел: {sum}");
+    }
+    else
+    {
+        Console.WriteLine("Введено неправильне n. Воно має бути натуральним числом.");
+    }
+}
+}
