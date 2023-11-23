@@ -1,0 +1,324 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        //#1
+        Console.Write("Введiть розмiрнiсть масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введiть елемент {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        double average = CalculateAverage(array);
+
+        Console.WriteLine($"Середнє арифметичне масиву: {average}");
+    }
+
+    static double CalculateAverage(int[] array)
+    {
+        if (array.Length == 0)
+        {
+            return 0;
+        }
+
+        int sum = 0;
+
+        foreach (int element in array)
+        {
+            sum += element;
+        }
+
+        return (double)sum / array.Length;
+        //#2
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        char[] array = new char[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть символ {i + 1}: ");
+            array[i] = Convert.ToChar(Console.ReadLine());
+        }
+
+        bool isPalindrome = CheckPalindrome(array);
+
+        if (isPalindrome)
+        {
+            Console.WriteLine("Масив - палiндром");
+        }
+        else
+        {
+            Console.WriteLine("Масив не палiндром");
+        }
+    }
+
+    static bool CheckPalindrome(char[] array)
+    {
+        int i = 0;
+        int j = array.Length - 1;
+
+        while (i < j)
+        {
+            if (array[i] != array[j])
+            {
+                return false;
+            }
+            i++;
+            j--;
+        }
+
+        return true;
+        //#3
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть елемент {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        Console.WriteLine("Парні числа у масиві:");
+
+        foreach (var element in array)
+        {
+            if (IsEven(element))
+            {
+                Console.WriteLine(element);
+            }
+        }
+    }
+
+    static bool IsEven(int number)
+    {
+        return number % 2 == 0;
+        //#4
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть елемент {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        int positiveSum = CalculatePositiveSum(array);
+
+        Console.WriteLine($"Сума додатних елементів у масиві: {positiveSum}");
+    }
+
+    static int CalculatePositiveSum(int[] array)
+    {
+        int sum = 0;
+
+        foreach (var element in array)
+        {
+            if (element > 0)
+            {
+                sum += element;
+            }
+        }
+
+        return sum;
+        //#5
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть елемент {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        Console.Write("Введіть елемент для пошуку його найменшого індексу: ");
+        int searchElement = Convert.ToInt32(Console.ReadLine());
+
+        int minIndex = FindMinIndex(array, searchElement);
+
+        if (minIndex != -1)
+        {
+            Console.WriteLine($"Найменший індекс для елемента {searchElement}: {minIndex}");
+        }
+        else
+        {
+            Console.WriteLine($"Елемент {searchElement} не знайдено в масиві.");
+        }
+    }
+
+    static int FindMinIndex(int[] array, int searchElement)
+    {
+        int minIndex = -1;
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] == searchElement && (minIndex == -1 || i < minIndex))
+            {
+                minIndex = i;
+            }
+        }
+
+        return minIndex;
+        //#6
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть елемент {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        int negativeProduct = CalculateNegativeProduct(array);
+
+        Console.WriteLine($"Добуток від'ємних елементів у масиві: {negativeProduct}");
+    }
+
+    static int CalculateNegativeProduct(int[] array)
+    {
+        int product = 1;
+
+        foreach (var element in array)
+        {
+            if (element < 0)
+            {
+                product *= element;
+            }
+        }
+
+        return product;
+        //#1
+        Console.Write("Введіть розмірність квадратної матриці: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[,] matrix = new int[size, size];
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                Console.Write($"Введіть елемент [{i + 1},{j + 1}]: ");
+                matrix[i, j] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+
+        int diagonalSum = CalculateDiagonalSum(matrix);
+
+        Console.WriteLine($"Сума елементів по головній діагоналі матриці: {diagonalSum}");
+    }
+
+    static int CalculateDiagonalSum(int[,] matrix)
+    {
+        int sum = 0;
+
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            sum += matrix[i, i];
+        }
+
+        return sum;
+        //#2
+        Console.Write("Введіть кількість рядків матриці: ");
+        int rows = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введіть кількість стовпців матриці: ");
+        int columns = Convert.ToInt32(Console.ReadLine());
+
+        int[,] matrix = new int[rows, columns];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write($"Введіть елемент [{i + 1},{j + 1}]: ");
+                matrix[i, j] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+
+        Console.Write("Введіть номер стовпця для обчислення добутку: ");
+        int targetColumn = Convert.ToInt32(Console.ReadLine());
+
+        int columnProduct = CalculateColumnProduct(matrix, targetColumn);
+
+        Console.WriteLine($"Добуток елементів стовпця {targetColumn}: {columnProduct}");
+    }
+
+    static int CalculateColumnProduct(int[,] matrix, int column)
+    {
+        int product = 1;
+
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            product *= matrix[i, column];
+        }
+
+        return product;
+        //#3
+        Console.Write("Введіть розмірність квадратної матриці: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[,] matrix = new int[size, size];
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                Console.Write($"Введіть елемент [{i + 1},{j + 1}]: ");
+                matrix[i, j] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+
+        RotateMatrix(matrix);
+
+        Console.WriteLine("Матриця після обертання на 90 градусів проти годинникової стрілки:");
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                Console.Write($"{matrix[i, j]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void RotateMatrix(int[,] matrix)
+    {
+        int size = matrix.GetLength(0);
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = i + 1; j < size; j++)
+            {
+                int temp = matrix[i, j];
+                matrix[i, j] = matrix[j, i];
+                matrix[j, i] = temp;
+            }
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size / 2; j++)
+            {
+                int temp = matrix[i, j];
+                matrix[i, j] = matrix[i, size - j - 1];
+                matrix[i, size - j - 1] = temp;
+            }
+        }
+    }
+}
