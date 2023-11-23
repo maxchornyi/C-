@@ -1,0 +1,146 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        //#1
+        Console.WriteLine("Всi парнi числа вiд 1 до 20:");
+
+        for (int i = 2; i <= 20; i += 2)
+        {
+            Console.WriteLine(i);
+        }
+        //#2
+        int sum = 0;
+
+        for (int i = 1; i <= 100; i++)
+        {
+            sum += i;
+        }
+
+        Console.WriteLine($"Сума чисел вiд 1 до 100: {sum}");
+        //#3
+        Console.Write("Введи число для таблицi множення: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"Таблиця множення числа {number}:");
+
+        for (int i = 1; i <= 10; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+        }
+        //#4
+        Console.Write("Введiть число для обчислення факторiалу: ");
+        int inputNumber = Convert.ToInt32(Console.ReadLine());
+
+        long factorial = CalculateFactorial(inputNumber);
+
+        Console.WriteLine($"Факторiал числа {inputNumber} дорiвнює {factorial}");
+    }
+
+    //#5
+    static long CalculateFactorial(int n)
+    {
+        if (n == 0 || n == 1)
+        {
+            return 1;
+        }
+
+        long result = 1;
+
+        for (int i = 2; i <= n; i++)
+        {
+            result *= i;
+        }
+
+        return result;
+        {
+            int sumOfPrimes = 0;
+
+            for (int i = 2; i <= 50; i++)
+            {
+                if (IsPrime(i))
+                {
+                    sumOfPrimes += i;
+                }
+            }
+
+            Console.WriteLine($"Сума простих чисел від 1 до 50: {sumOfPrimes}");
+        }
+
+        static bool IsPrime(int number)
+        {
+            if (number < 2)
+            {
+                return false;
+            }
+
+            for (int i = 2; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
+        Console.Write("Введіть число для переведення в двiйкову систему: ");
+        int decimalNumber = Convert.ToInt32(Console.ReadLine());
+
+        string binaryNumber = DecimalToBinary(decimalNumber);
+
+        Console.WriteLine($"Двiйкове представлення числа {decimalNumber}: {binaryNumber}");
+    }
+
+    static string DecimalToBinary(int decimalNumber)
+    {
+        return Convert.ToString(decimalNumber, 2);
+        //#7 
+        Console.Write("Введiть максимальне число для суми Фiбоначчi: ");
+        int maxNumber = Convert.ToInt32(Console.ReadLine());
+
+        int sum = 0;
+        int fib1 = 0;
+        int fib2 = 1;
+        int count = 0;
+
+        while (fib2 < maxNumber)
+        {
+            sum += fib2;
+            count++;
+
+            int temp = fib1;
+            fib1 = fib2;
+            fib2 = temp + fib2;
+        }
+
+        Console.WriteLine($"Сума чисел Фiбоначчi менше {maxNumber}: {sum}");
+        Console.WriteLine($"Кількість елементів: {count}");
+        //#8
+        Console.Write("Введiть перше число: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введiть друге число: ");
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        int gcd = FindGCD(num1, num2);
+
+        Console.WriteLine($"Найбiльший спiльний дiльник для {num1} і {num2}: {gcd}");
+    }
+
+    static int FindGCD(int a, int b)
+    {
+        while (b != 0)
+        {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return a;
+    }
+}
