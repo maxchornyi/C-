@@ -1,0 +1,139 @@
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        //#1
+        Console.Write("Введiть число: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        if (number > 0)
+        {
+            Console.WriteLine("Введене число - додатнє.");
+        }
+        else if (number < 0)
+        {
+            Console.WriteLine("Введене число - вiд'ємне");
+        }
+        else
+        {
+            Console.WriteLine("Введене число - нуль");
+        }
+        //#2
+        Console.Write("Ввести рiк: ");
+        int year = Convert.ToInt32(Console.ReadLine());
+
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        {
+            Console.WriteLine($"{year} рiк - високосний");
+        }
+        else
+        {
+            Console.WriteLine($"{year} рiк - не високосний");
+        }
+        //#3
+        Console.Write("Ввести рiчний дохiд: ");
+        double income = Convert.ToDouble(Console.ReadLine());
+
+        double pod = 0.05;
+
+        if (income > 10000)
+        {
+            pod = 0.1;
+        }
+
+        if (income > 50000)
+        {
+            pod = 0.15;
+        }
+
+        double splata = income * pod;
+
+        Console.WriteLine($"Податок на дохiд: {pod:C}");
+        //#4
+        Console.Write("ввести символ: ");
+        char inputChar = Console.ReadKey().KeyChar;
+        Console.WriteLine();
+
+        if ("AEIOUaeiou".Contains(inputChar))
+        {
+            Console.WriteLine($"{inputChar} - це голосна буква");
+        }
+        else if (char.IsLetter(inputChar))
+        {
+            Console.WriteLine($"{inputChar} - це приголосна буква");
+        }
+        else
+        {
+            Console.WriteLine($"{inputChar} - це не є буква");
+        }
+        //#5
+        Console.Write("Введи перше число: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введи друге число: ");
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введи третє число: ");
+        int num3 = Convert.ToInt32(Console.ReadLine());
+
+        int maxNumber = Math.Max(Math.Max(num1, num2), num3);
+
+        Console.WriteLine($"Найбiльше число: {maxNumber}");
+        //#6
+        Console.Write("Введи свiй вiк: ");
+        int age = Convert.ToInt32(Console.ReadLine());
+
+        if (age >= 12 && age <= 18)
+        {
+            Console.WriteLine("Цей вiк - пiдлiтковий");
+        }
+        else
+        {
+            Console.WriteLine("Цей вiк не пiдлiтковий");
+        }
+        //#7
+        Console.Write("Введiть число: ");
+        int number1 = Convert.ToInt32(Console.ReadLine());
+        if (number1 % 2 == 0)
+        {
+            Console.WriteLine($"{number1} є парним числом.");
+        }
+        else
+        {
+            Console.WriteLine($"{number1} є непарним числом.");
+        }
+        if (number1 % 3 == 0)
+        {
+            Console.WriteLine($"{number1} дiлиться на 3");
+        }
+        else
+        {
+            Console.WriteLine($"{number1} не дiлиться на 3");
+        }
+        //#8
+        Console.Write("Введи довжину сторони a: ");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введи довжину сторони b: ");
+        double b = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введи довжину сторони c: ");
+        double c = Convert.ToDouble(Console.ReadLine());
+
+        if (a >= b && a >= c)
+        {
+            Console.WriteLine($"Сторона a ({a}) найдовша");
+        }
+        else if (b >= a && b >= c)
+        {
+            Console.WriteLine($"Сторона b ({b}) найдовша");
+        }
+        else
+        {
+            Console.WriteLine($"Сторона c ({c}) найдовша");
+        }
+    }
+}
