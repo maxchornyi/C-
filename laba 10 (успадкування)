@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+
+abstract class Shape
+{
+    protected string name;
+
+    public string Name
+    {
+        get { return name; }
+    }
+
+    public Shape(string name)
+    {
+        this.name = name;
+    }
+
+    public abstract double Area();
+    public abstract double Perimeter();
+}
+
+class Circle : Shape
+{
+    private double radius;
+
+    public double Radius
+    {
+        get { return radius; }
+        set
+        {
+            if (value <= 0)
+            {
+                Console.WriteLine("Радіус повинен бути бiльше 0");
+            }
+            else
+            {
+                radius = value;
+            }
+        }
+    }
+
+    public Circle(double radius) : base("Коло")
+    {
+        Radius = radius;
+    }
+
+    public override double Area()
+    {
+        return Math.PI * Math.Pow(radius, 2);
+    }
+
+    public override double Perimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Square : Shape
+{
+    private double side;
+
+    public double Side
+    {
+        get { return side; }
+        set
+        {
+            if (value <= 0)
+            {
+                Console.WriteLine("Сторона квадрата має бути бiльша за 0");
+            }
+            else
+            {
+                side = value;
+            }
+        }
+    }
+
+    public Square(double side) : base("Квадрат")
+    {
+        Side = side;
+    }
+
+    public override double Area()
+    {
+        return Math.Pow(side, 2);
+    }
+
+    public override double Perimeter()
+    {
+        return 4 * side;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<Shape> shapes = new List<Shape>
+        {
+            new Circle(3),
+            new Circle(4),
+            new Square(5),
+            new Square(6)
+        };
+
+        Console.WriteLine("Iнформацiя про всi фiгури:");
+        foreach (var shape in shapes)
+        {
+            Console.WriteLine($"{shape.Name}: Площа = {shape.Area()}, Периметр = {shape.Perimeter()}");
+        }
+
+        double maxSquareArea = 0;
+        double maxCircleArea = 0;
+
+        foreach (var shape in shapes)
+        {
+            if (shape is Square square)
+            {
+                maxSquareArea = Math.Max(maxSquareArea, square.Area());
+            }
+            else if (shape is Circle circle)
+            {
+                maxCircleArea = Math.Max(maxCircleArea, circle.Area());
+            }
+        }
+
+        Console.WriteLine($"\nПлоща найбiльшого квадрата: {maxSquareArea}");
+        Console.WriteLine($"Площа найбiльшого кола: {maxCircleArea}");
+    }
+}
+
