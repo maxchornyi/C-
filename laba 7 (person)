@@ -1,0 +1,125 @@
+using System;
+
+class Person
+{
+    private string name;
+    private DateTime birthYear;
+
+    public string Name
+    {
+        get { return name; }
+    }
+
+    public DateTime BirthYear
+    {
+        get { return birthYear; }
+    }
+
+    public Person()
+    {
+    }
+
+    public Person(string name, DateTime birthYear)
+    {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    public int Age()
+    {
+        DateTime currentDate = DateTime.Now;
+        int age = currentDate.Year - birthYear.Year;
+
+        if (currentDate.DayOfYear < birthYear.DayOfYear)
+        {
+            age--;
+        }
+
+        return age;
+    }
+
+    public void Input()
+    {
+        Console.Write("Введіть ім'я: ");
+        name = Console.ReadLine();
+
+        Console.Write("Введіть рік народження (Наприклад 2005): ");
+        string inputYear = Console.ReadLine();
+
+        while (!DateTime.TryParseExact(inputYear, "yyyy", null, System.Globalization.DateTimeStyles.None, out birthYear))
+        {
+            Console.WriteLine("Некоректний формат року. Будь ласка, введіть ще раз");
+            Console.Write("Введіть рік народження (Наприклад 2005): ");
+            inputYear = Console.ReadLine();
+        }
+    }
+
+    public void ChangeName(string newName)
+    {
+        name = newName;
+    }
+
+    public override string ToString()
+    {
+        return $"Ім'я: {name}, Рік народження: {birthYear.Year}";
+    }
+
+    public void Output()
+    {
+        Console.WriteLine(ToString());
+    }
+
+    public static bool operator ==(Person person1, Person person2)
+    {
+        return person1.name == person2.name;
+    }
+
+    public static bool operator !=(Person person1, Person person2)
+    {
+        return !(person1 == person2);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person[] people = new Person[6];
+
+        for (int i = 0; i < people.Length; i++)
+        {
+            Console.WriteLine($"\nВведення інформації про особу {i + 1}:");
+            people[i] = new Person();
+            people[i].Input();
+        }
+
+        Console.WriteLine("\nІнформація про особи:");
+        for (int i = 0; i < people.Length; i++)
+        {
+            Console.WriteLine($"Ім'я: {people[i].Name}, Вік: {people[i].Age()}");
+        }
+
+        Console.WriteLine("\nЗміна імен і осіб молодше 16 років:");
+        for (int i = 0; i < people.Length; i++)
+        {
+            if (people[i].Age() < 16)
+            {
+                people[i].ChangeName("Very Young");
+            }
+
+            people[i].Output();
+        }
+
+        Console.WriteLine("\nІнформація про особи з однаковими іменами:");
+        for (int i = 0; i < people.Length; i++)
+        {
+            for (int j = i + 1; j < people.Length; j++)
+            {
+                if (people[i] == people[j])
+                {
+                    Console.WriteLine($"{people[i].Name} і {people[j].Name} мають однакове ім'я.");
+                }
+            }
+        }
+    }
+}
