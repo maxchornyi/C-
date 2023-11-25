@@ -1,0 +1,212 @@
+using System;
+using System.Linq;
+
+class Calculator
+{
+    static void Main()
+    {
+        //#1
+        Console.Write("Введiть перший операнд: ");
+        double operand1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введiть другий операнд: ");
+        double operand2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введiть операцiю (+, -, *, /): ");
+        char operation = Convert.ToChar(Console.ReadLine());
+
+        double result = PerformOperation(operand1, operand2, operation);
+
+        Console.WriteLine($"Результат: {result}");
+    }
+
+    static double PerformOperation(double operand1, double operand2, char operation)
+    {
+        switch (operation)
+        {
+            case '+':
+                return operand1 + operand2;
+            case '-':
+                return operand1 - operand2;
+            case '*':
+                return operand1 * operand2;
+            case '/':
+                if (operand2 != 0)
+                {
+                    return operand1 / operand2;
+                }
+                else
+                {
+                    Console.WriteLine("Ділення на 0");
+                    return double.NaN; 
+                }
+            default:
+                Console.WriteLine("Неправильна операція");
+                return double.NaN; 
+        }
+        //#2
+        Console.Write("Введіть число для перевірки: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        bool isPrime = IsPrimeNumber(number);
+
+        if (isPrime)
+        {
+            Console.WriteLine($"{number} є простим числом.");
+        }
+        else
+        {
+            Console.WriteLine($"{number} не є простим числом.");
+        }
+    }
+
+    static bool IsPrimeNumber(int number)
+    {
+        if (number <= 1)
+        {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+        //#3
+        static void Main()
+        {
+            Console.Write("Введіть суму для конвертації: ");
+            double amount = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Введіть поточний обмінний курс: ");
+            double exchangeRate = Convert.ToDouble(Console.ReadLine());
+
+            double convertedAmount = ConvertCurrency(amount, exchangeRate);
+
+            Console.WriteLine($"Готва сума: {convertedAmount}");
+        }
+
+        static double ConvertCurrency(double amount, double exchangeRate)
+        {
+            return amount * exchangeRate;
+          
+        }
+        //#4
+        Console.Write("Введіть розмірність масиву: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Введіть число {i + 1}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+        int minElement = array[0];
+        int maxElement = array[0];
+
+        for (int i = 1; i < size; i++)
+        {
+            if (array[i] < minElement)
+            {
+                minElement = array[i];
+            }
+
+            if (array[i] > maxElement)
+            {
+                maxElement = array[i];
+            }
+        }
+
+        Console.WriteLine($"Найменший елемент: {minElement}");
+        Console.WriteLine($"Найбільший елемент: {maxElement}");
+        //#5
+        Console.Write("Введiть рядок: ");
+        string inputString = Console.ReadLine();
+
+        int vowelsCount, consonantsCount;
+        CountVowelsAndConsonants(inputString, out vowelsCount, out consonantsCount);
+
+        Console.WriteLine($"Кiлькiсть голосних букв: {vowelsCount}");
+        Console.WriteLine($"Кiлькiсть приголосних букв: {consonantsCount}");
+    }
+
+    static void CountVowelsAndConsonants(string input, out int vowels, out int consonants)
+    {
+        vowels = 0;
+        consonants = 0;
+
+        foreach (char c in input.ToLower())
+        {
+            if (Char.IsLetter(c))
+            {
+                if ("aeiou".Contains(c))
+                {
+                    vowels++;
+                }
+                else
+                {
+                    consonants++;
+                }
+            }
+        }
+        //#6
+        Console.WriteLine("Обчислення площі та об'єму геометричних фігур");
+        Console.WriteLine("1. Круг");
+        Console.WriteLine("2. Прямокутник");
+        Console.WriteLine("3. Куб");
+
+        Console.Write("Виберіть опцію (1-3): ");
+        int option = Convert.ToInt32(Console.ReadLine());
+
+        switch (option)
+        {
+            case 1:
+                CalculateCircle();
+                break;
+            case 2:
+                CalculateRectangle();
+                break;
+            case 3:
+                CalculateCube();
+                break;
+            default:
+                Console.WriteLine("Так не можна <3");
+                break;
+        }
+    }
+
+    static void CalculateCircle()
+    {
+        Console.Write("Введіть радіус круга: ");
+        double radius = Convert.ToDouble(Console.ReadLine());
+
+        double area = Math.PI * Math.Pow(radius, 2);
+        Console.WriteLine($"Площа круга: {area}");
+    }
+
+    static void CalculateRectangle()
+    {
+        Console.Write("Введіть довжину прямокутника: ");
+        double length = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введіть ширину прямокутника: ");
+        double width = Convert.ToDouble(Console.ReadLine());
+
+        double area = length * width;
+        Console.WriteLine($"Площа прямокутника: {area}");
+    }
+
+    static void CalculateCube()
+    {
+        Console.Write("Введіть довжину ребра куба: ");
+        double sideLength = Convert.ToDouble(Console.ReadLine());
+
+        double volume = Math.Pow(sideLength, 3);
+        Console.WriteLine($"Об'єм куба: {volume}");
+    }
+}
