@@ -1,0 +1,89 @@
+using System;
+
+class Car
+{
+    public string Model { get; set; }
+    public string Color { get; set; }
+    public double Price { get; set; }
+    public const string CompanyName = "CarCorp"; 
+
+    public Car()
+    {
+
+    }
+
+    public Car(string name, string color, double price)
+    {
+        Model = name;
+        Color = color;
+        Price = price;
+    }
+
+    public void Input()
+    {
+        Console.Write("Введіть модель автомобіля: ");
+        Model = Console.ReadLine();
+
+        Console.Write("Введіть колір автомобіля: ");
+        Color = Console.ReadLine();
+
+        Console.Write("Введіть ціну автомобіля: ");
+        Price = Convert.ToDouble(Console.ReadLine());
+    }
+
+    public void Print()
+    {
+        Console.WriteLine(PrintInfo());
+    }
+
+    public void ChangePrice(double x)
+    {
+        Price *= (1 - x / 100);
+    }
+
+    public void PaintCar(string newColor)
+    {
+        if (Color.ToLower() == "white")
+        {
+            Color = newColor;
+            Console.WriteLine($"Автомобіль {Model} успішно пофарбовано у колір {Color}.");
+        }
+        else
+        {
+            Console.WriteLine($"Автомобіль {Model} не був білим, тому не може бути пофарбованим.");
+        }
+    }
+
+    public string PrintInfo()
+    {
+        return $"Модель: {Model}, Колір: {Color}, Ціна: {Price:C}, Компанія: {CompanyName}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Car[] cars = new Car[3];
+
+        for (int i = 0; i < cars.Length; i++)
+        {
+            Console.WriteLine($"\nВведення інформації про автомобіль {i + 1}:");
+            cars[i] = new Car();
+            cars[i].Input();
+        }
+        Console.WriteLine("\nЗменшення цін на 10% та виведення інформації:");
+        foreach (var car in cars)
+        {
+            car.ChangePrice(10);
+            car.Print();
+        }
+        Console.WriteLine("\nФарбування білих авто:");
+        foreach (var car in cars)
+        {
+            Console.Write($"Введіть новий колір для авто {car.Model}: ");
+            string newColor = Console.ReadLine();
+            car.PaintCar(newColor);
+        }
+    }
+}
