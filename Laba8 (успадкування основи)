@@ -1,0 +1,112 @@
+using System;
+
+class Figure
+{
+    public virtual double CalculateArea()
+    {
+        return 0;
+    }
+
+    public virtual double CalculatePerimeter()
+    {
+        return 0;
+    }
+}
+
+class Circle : Figure
+{
+    private double radius;
+
+    public double Radius
+    {
+        get { return radius; }
+        set
+        {
+            if (value <= 0)
+            {
+                Console.WriteLine("Радіус повинен бути більше 0.");
+            }
+            else
+            {
+                radius = value;
+            }
+        }
+    }
+
+    public override double CalculateArea()
+    {
+        return Math.PI * Math.Pow(radius, 2);
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle : Figure
+{
+    private double width;
+    private double height;
+
+    public double Width
+    {
+        get { return width; }
+        set
+        {
+            if (value <= 0)
+            {
+                Console.WriteLine("Ширина прямокутника має буии більша за 0");
+            }
+            else
+            {
+                width = value;
+            }
+        }
+    }
+
+    public double Height
+    {
+        get { return height; }
+        set
+        {
+            if (value <= 0)
+            {
+                Console.WriteLine("Висота прямокутника має бути більша за 0");
+            }
+            else
+            {
+                height = value;
+            }
+        }
+    }
+
+    public override double CalculateArea()
+    {
+        return width * height;
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * (width + height);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Circle circle = new Circle();
+        circle.Radius = 5;
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.Width = 10;
+        rectangle.Height = 15;
+
+        Console.WriteLine($"Площа кола: {circle.CalculateArea()}");
+        Console.WriteLine($"Периметр кола: {circle.CalculatePerimeter()}");
+
+        Console.WriteLine($"Площа прямокутника: {rectangle.CalculateArea()}");
+        Console.WriteLine($"Периметр прямокутника: {rectangle.CalculatePerimeter()}");
+    }
+}
