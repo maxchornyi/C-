@@ -1,3 +1,4 @@
+//#1
 using System;
 
 class Figure
@@ -108,5 +109,54 @@ class Program
 
         Console.WriteLine($"Площа прямокутника: {rectangle.CalculateArea()}");
         Console.WriteLine($"Периметр прямокутника: {rectangle.CalculatePerimeter()}");
+    }
+}
+//#2 
+
+using System;
+
+class Fruit
+{
+    public string Name { get; set; }
+
+    public Fruit(string name)
+    {
+        Name = name;
+    }
+}
+
+class Apple : Fruit
+{
+    public string Variety { get; set; }
+    public string Color { get; set; }
+
+    public Apple(string name, string variety, string color) : base(name)
+    {
+        Variety = variety;
+        Color = color;
+    }
+}
+
+class Pear : Fruit
+{
+    public string Variety { get; set; }
+    public string Color { get; set; }
+
+    public Pear(string name, string variety, string color) : base(name)
+    {
+        Variety = variety;
+        Color = color;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Apple apple = new Apple("яблуко", "слава переможцям", "червоно-зелений");
+        Pear pear = new Pear("грушу", "звичайний", "зелений");
+
+        Console.WriteLine($"Дані про {apple.Name}: сорт - {apple.Variety}, колір - {apple.Color}");
+        Console.WriteLine($"Дані про {pear.Name}: сорт - {pear.Variety}, колір - {pear.Color}");
     }
 }
