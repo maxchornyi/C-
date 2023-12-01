@@ -1,3 +1,4 @@
+#1
 using System;
 
 public interface IVehicle
@@ -124,5 +125,369 @@ class Program
         myTruck.Drive();
         myTruck.Stop();
         myTruck.LoadCargo();
+    }
+}
+//#3
+using System;
+
+public interface IPrintable
+{
+    void Print();
+}
+
+public interface IBorrowable
+{
+    void BorrowItem();
+    void ReturnItem();
+    bool IsAvailable();
+}
+
+public class Book : IPrintable, IBorrowable
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+    public bool IsBorrowed { get; private set; }
+
+    public void Print()
+    {
+        Console.WriteLine($"Назава: {Title}, Автор: {Author}, Рік випуску: {Year}");
+    }
+
+    public void BorrowItem()
+    {
+        if (!IsBorrowed)
+        {
+            IsBorrowed = true;
+            Console.WriteLine($"{Title} позичена");
+        }
+        else
+        {
+            Console.WriteLine($"{Title} вже позичена");
+        }
+    }
+
+    public void ReturnItem()
+    {
+        if (IsBorrowed)
+        {
+            IsBorrowed = false;
+            Console.WriteLine($"{Title} повернена");
+        }
+        else
+        {
+            Console.WriteLine($"{Title} не позичена");
+        }
+    }
+
+    public bool IsAvailable()
+    {
+        return !IsBorrowed;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Book book1 = new Book { Title = "Персі Джексон і ловець блискавок", Author = "Рік Ріордан", Year = 2009};
+        Book book2 = new Book { Title = "Син Нептуна", Author = "Рік Ріордан", Year = 2018 };
+
+        Console.WriteLine("Book 1:");
+        book1.Print();
+
+        Console.WriteLine("\nBook 2:");
+        book2.Print();
+
+        book1.BorrowItem();
+        book2.BorrowItem();
+
+        Console.WriteLine("\nДоступність після позичення:");
+        Console.WriteLine($"Book 1 is available: {book1.IsAvailable()}");
+        Console.WriteLine($"Book 2 is available: {book2.IsAvailable()}");
+
+        book1.ReturnItem();
+        book2.ReturnItem();
+
+        Console.WriteLine("\nДоступність після повернення:");
+        Console.WriteLine($"Book 1 is available: {book1.IsAvailable()}");
+        Console.WriteLine($"Book 2 is available: {book2.IsAvailable()}");
+    }
+}
+#2
+using System;
+
+public interface ITask
+{
+    void Start();
+    void Complete();
+    string GetTaskInfo();
+}
+
+public class WorkTask : ITask
+{
+    public string Title { get; set; }
+    public string Project { get; set; }
+    public bool IsCompleted { get; private set; }
+
+    public void Start()
+    {
+        Console.WriteLine($"Завдання '{Title}' стартує з '{Project}'.");
+    }
+
+    public void Complete()
+    {
+        IsCompleted = true;
+        Console.WriteLine($"Завдання '{Title}' стартує з '{Project}'.");
+    }
+
+    public string GetTaskInfo()
+    {
+        return $"Завдання {Title}, Project: {Project}, Закінчене: {IsCompleted}";
+    }
+}
+
+public class PersonalTask : ITask
+{
+    public string Description { get; set; }
+    public bool IsCompleted { get; private set; }
+
+    public void Start()
+    {
+        Console.WriteLine($"Особисте завдання '{Description}' почато");
+    }
+
+    public void Complete()
+    {
+        IsCompleted = true;
+        Console.WriteLine($"Особисте завдання '{Description}' почато");
+    }
+
+    public string GetTaskInfo()
+    {
+        return $"Особисте завдання {Description}, Виконано: {IsCompleted}";
+    }
+}
+
+public class StudyTask : ITask
+{
+    public string Subject { get; set; }
+    public bool IsCompleted { get; private set; }
+
+    public void Start()
+    {
+        Console.WriteLine($"Навчання '{Subject}' почато");
+    }
+
+    public void Complete()
+    {
+        IsCompleted = true;
+        Console.WriteLine($"Навчання '{Subject}' зроблено");
+    }
+
+    public string GetTaskInfo()
+    {
+        return $"Предмет: предмет - {Subject}, Зроблено: {IsCompleted}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        ITask workTask = new WorkTask { Title = "Перевірка коду", Project = "Вивчення коду" };
+        ITask personalTask = new PersonalTask { Description = "Вправи" };
+        ITask studyTask = new StudyTask { Subject = "Математика" };
+
+        workTask.Start();
+        workTask.Complete();
+        Console.WriteLine(workTask.GetTaskInfo());
+
+        personalTask.Start();
+        personalTask.Complete();
+        Console.WriteLine(personalTask.GetTaskInfo());
+
+        studyTask.Start();
+        studyTask.Complete();
+        Console.WriteLine(studyTask.GetTaskInfo());
+    }
+}
+//#4
+using System;
+
+public interface IPlayable
+{
+    void Play();
+    void Pause();
+    void Stop();
+}
+
+public interface IRecordable
+{
+    void Record();
+}
+
+public class MusicTrack : IPlayable, IRecordable
+{
+    public string Title { get; set; }
+    public string Artist { get; set; }
+    public TimeSpan Duration { get; set; }
+    private bool isPlaying;
+    private bool isRecording;
+
+    public void Play()
+    {
+        if (!isRecording)
+        {
+            Console.WriteLine($"Playing: {Artist} - {Title}");
+            isPlaying = true;
+        }
+        else
+        {
+            Console.WriteLine("Cannot play while recording.");
+        }
+    }
+
+    public void Pause()
+    {
+        if (isPlaying)
+        {
+            Console.WriteLine("Pause");
+            isPlaying = false;
+        }
+        else
+        {
+            Console.WriteLine("Not currently playing");
+        }
+    }
+
+    public void Stop()
+    {
+        if (isPlaying)
+        {
+            Console.WriteLine("Stop");
+            isPlaying = false;
+        }
+        else
+        {
+            Console.WriteLine("Not currently playing");
+        }
+    }
+
+    public void Record()
+    {
+        if (!isPlaying)
+        {
+            Console.WriteLine($"Recording: {Artist} - {Title}");
+            isRecording = true;
+        }
+        else
+        {
+            Console.WriteLine("Cannot record while playing");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        MusicTrack track1 = new MusicTrack
+        {
+            Title = "Tell Em",
+            Artist = "cochise",
+            Duration = TimeSpan.FromMinutes(3)
+        };
+
+        track1.Play();
+        track1.Pause();
+        track1.Record();
+        track1.Stop();
+
+        MusicTrack track2 = new MusicTrack
+        {
+            Title = "Chamber of Reflection",
+            Artist = "Mac DeMarco",
+            Duration = TimeSpan.FromMinutes(4)
+        };
+
+        track2.Record();
+        track2.Play();
+        track2.Pause();
+        track2.Stop();
+    }
+}
+//#5
+using System;
+
+public interface IProduct
+{
+    void DisplayInfo();
+}
+
+public interface IShoppable
+{
+    void AddToCart();
+}
+
+public class ElectronicDevice : IProduct
+{
+    public string Name { get; set; }
+    public string Manufacturer { get; set; }
+    public decimal Price { get; set; }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Назва: {Name}, Виробник: {Manufacturer}, Ціна: {Price:C}");
+    }
+}
+
+public class Smartphone : ElectronicDevice, IShoppable
+{
+    public string OperatingSystem { get; set; }
+
+    public void AddToCart()
+    {
+        Console.WriteLine($"{Name} додано в корзину");
+    }
+}
+
+public class tablet : ElectronicDevice, IShoppable
+{
+    public string Processor { get; set; }
+
+    public void AddToCart()
+    {
+        Console.WriteLine($"{Name} додано в корзину");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Smartphone smartphone = new Smartphone
+        {
+            Name = "iPhone 13 pro",
+            Manufacturer = "Apple",
+            Price = 800m,
+            OperatingSystem = "ios"
+        };
+
+        tablet Tablet = new tablet
+        {
+            Name = "Ipad pro 11' 2021",
+            Manufacturer = "Apple",
+            Price = 700m,
+            Processor = "m1"
+        };
+
+        smartphone.DisplayInfo();
+        smartphone.AddToCart();
+
+        Console.WriteLine();
+
+        Tablet.DisplayInfo();
+        Tablet.AddToCart();
     }
 }
