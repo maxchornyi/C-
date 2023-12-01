@@ -1,0 +1,69 @@
+using System;
+
+namespace Lab5
+{
+    public enum Gender
+    {
+        Male,
+        Female
+    }
+
+    public class Cat
+    {
+        public string Name { get; }
+        public Gender Gender { get; }
+
+        private double _energy;
+
+        public double Energy
+        {
+            get { return _energy; }
+            private set
+            {
+                if (value < MinEnergy)
+                {
+                    throw new ArgumentException("Not enough energy to jump");
+                }
+
+                _energy = Math.Min(value, MaxEnergy);
+            }
+        }
+
+        public static readonly double MaxEnergy = 20.0;
+        public static readonly double MinEnergy = 0.0;
+        public static readonly double SleepEnergyGain = 10.0;
+        public static readonly double JumpEnergyDrain = 0.5;
+
+        public Cat(string name, Gender gender)
+        {
+            Name = name;
+            Gender = gender;
+            Energy = MaxEnergy;
+        }
+
+        public void Jump()
+        {
+            Energy -= JumpEnergyDrain;
+            Console.WriteLine($"{Name} jumped! Energy: {Energy}");
+        }
+
+        public void Sleep()
+        {
+            Energy += SleepEnergyGain;
+            Console.WriteLine($"{Name} slept! Energy: {Energy}");
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Cat myCat = new Cat("Дерунчик", Gender.Male);
+
+            Console.WriteLine($"Name: {myCat.Name}, Gender: {myCat.Gender}, Energy: {myCat.Energy}");
+
+            myCat.Jump();
+            myCat.Sleep();
+        }
+    }
+}
