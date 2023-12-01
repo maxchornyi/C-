@@ -1,0 +1,164 @@
+//#1
+using System;
+using System.Collections.Generic;
+
+public class Task
+{
+    public int TaskId { get; set; }
+    public string Description { get; set; }
+}
+
+public class TaskManager
+{
+    private List<Task> taskList;
+
+    public TaskManager()
+    {
+        taskList = new List<Task>();
+    }
+
+    public void AddTask(Task newTask)
+    {
+        newTask.TaskId = taskList.Count + 1;
+
+        taskList.Add(newTask);
+
+        Console.WriteLine($"Task added: TaskId = {newTask.TaskId}, Description = {newTask.Description}");
+    }
+
+    public void RemoveTask(int taskId)
+    {
+        Task taskToRemove = taskList.Find(task => task.TaskId == taskId);
+
+        if (taskToRemove != null)
+        {
+            taskList.Remove(taskToRemove);
+            Console.WriteLine($"Task removed: TaskId = {taskId}, Description = {taskToRemove.Description}");
+        }
+        else
+        {
+            Console.WriteLine($"Task with TaskId = {taskId} not found.");
+        }
+    }
+
+    public void DisplayTasks()
+    {
+        Console.WriteLine("Task List:");
+
+        foreach (Task task in taskList)
+        {
+            Console.WriteLine($"TaskId = {task.TaskId}, Description = {task.Description}");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+
+        TaskManager taskManager = new TaskManager();
+
+        Task task1 = new Task { Description = "Зробити домашні завдання" };
+        Task task2 = new Task { Description = "Прибратись вдома" };
+        Task task3 = new Task { Description = "Прогулятись" };
+
+        taskManager.AddTask(task1);
+        taskManager.AddTask(task2);
+        taskManager.AddTask(task3);
+
+        taskManager.DisplayTasks();
+
+        taskManager.RemoveTask(1);
+
+        taskManager.DisplayTasks();
+    }
+}
+
+//#2
+using System;
+using System.Collections.Generic;
+
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+public class UserManager
+{
+    private List<User> userList;
+
+    public UserManager()
+    {
+        userList = new List<User>();
+    }
+    public void AddUser(User newUser)
+    {
+        newUser.Id = userList.Count + 1;
+
+        userList.Add(newUser);
+
+        Console.WriteLine($"User added: Id = {newUser.Id}, Name = {newUser.Name}");
+    }
+
+    public void RemoveUser(int userId)
+    {
+        User userToRemove = userList.Find(user => user.Id == userId);
+
+        if (userToRemove != null)
+        {
+            userList.Remove(userToRemove);
+            Console.WriteLine($"User removed: Id = {userId}, Name = {userToRemove.Name}");
+        }
+        else
+        {
+            Console.WriteLine($"User with Id = {userId} not found.");
+        }
+    }
+    public User FindUser(int userId)
+    {
+        return userList.Find(user => user.Id == userId);
+    }
+    public void DisplayUsers()
+    {
+        Console.WriteLine("User List:");
+
+        foreach (User user in userList)
+        {
+            Console.WriteLine($"Id = {user.Id}, Name = {user.Name}");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        UserManager userManager = new UserManager();
+
+        User user1 = new User { Name = "Шин Хаті" };
+        User user2 = new User { Name = "Падме" };
+        User user3 = new User { Name = "Асока" };
+
+        userManager.AddUser(user1);
+        userManager.AddUser(user2);
+        userManager.AddUser(user3);
+
+        userManager.DisplayUsers();
+
+        userManager.RemoveUser(2);
+
+        userManager.DisplayUsers();
+
+        User foundUser = userManager.FindUser(1);
+        if (foundUser != null)
+        {
+            Console.WriteLine($"Found user: Id = {foundUser.Id}, Name = {foundUser.Name}");
+        }
+        else
+        {
+            Console.WriteLine("User not found.");
+        }
+    }
+}
