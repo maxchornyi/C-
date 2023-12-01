@@ -1,0 +1,128 @@
+using System;
+
+public interface IVehicle
+{
+    void Start();
+    void Stop();
+    void Drive();
+}
+
+public class Car : IVehicle
+{
+    public string Model { get; set; }
+    public int Year { get; set; }
+
+    public Car(string model, int year)
+    {
+        Model = model;
+        Year = year;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Year} {Model} is starting.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Year} {Model} is stopping.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Year} {Model} is driving.");
+    }
+
+    public void Honk()
+    {
+        Console.WriteLine($"{Year} {Model} is broken");
+    }
+}
+
+public class Motorcycle : IVehicle
+{
+    public string Brand { get; set; }
+    public bool HasHelmet { get; set; }
+
+    public Motorcycle(string brand, bool hasHelmet)
+    {
+        Brand = brand;
+        HasHelmet = hasHelmet;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Brand} motorcycle is starting.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Brand} motorcycle is stopping.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Brand} motorcycle is driving.");
+    }
+
+    public void Wheelie()
+    {
+        Console.WriteLine($"{Brand} motorcycle needs oil");
+    }
+}
+
+public class Truck : IVehicle
+{
+    public string Manufacturer { get; set; }
+    public double LoadCapacity { get; set; }
+
+    public Truck(string manufacturer, double loadCapacity)
+    {
+        Manufacturer = manufacturer;
+        LoadCapacity = loadCapacity;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Manufacturer} truck is starting.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Manufacturer} truck is stopping.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Manufacturer} truck is driving.");
+    }
+
+    public void LoadCargo()
+    {
+        Console.WriteLine($"{Manufacturer} truck is too heavy");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Car myCar = new Car("Porsche 992 Targa", 2022);
+        myCar.Start();
+        myCar.Drive();
+        myCar.Stop();
+        myCar.Honk();
+
+        Motorcycle myMotorcycle = new Motorcycle("Kawasaki", true);
+        myMotorcycle.Start();
+        myMotorcycle.Drive();
+        myMotorcycle.Stop();
+        myMotorcycle.Wheelie();
+
+        Truck myTruck = new Truck("Volvo", VNL760);
+        myTruck.Start();
+        myTruck.Drive();
+        myTruck.Stop();
+        myTruck.LoadCargo();
+    }
+}
